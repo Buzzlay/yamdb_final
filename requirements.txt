@@ -11,7 +11,7 @@ chardet==4.0.0            # via requests
 django==3.2             # via -r requirements.in, djangorestframework
 django-filter==2.4.0
 djangorestframework==3.12.4  # via -r requirements.in
-idna==3.1                 # via requests
+idna==2.9                 # via requests
 importlib-metadata==3.10.1  # via pluggy, pytest
 more-itertools==8.7.0     # via pytest
 packaging==20.9           # via pytest
