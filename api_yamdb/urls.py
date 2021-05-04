@@ -9,8 +9,6 @@ urlpatterns = [
                          namespace='title-api')),
     path('api/', include(('users.urls', 'users'),
                          namespace='users-auth-api')),
-    path('redoc/', TemplateView.as_view(
-        template_name='redoc.html'),
-         name='redoc'
-         ),
-    ]
+    path('redoc/',
+         TemplateView.as_view(template_name='redoc.html'), name='redoc'),
+]
