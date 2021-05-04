@@ -121,4 +121,5 @@ CSRF_COOKIE_HTTPONLY = True
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
 }
+
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
