@@ -1,3 +1,3 @@
 # yamdb_final
 yamdb_final
-https://github.com/buzzlay/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg
+[![yamdb_final workflow Actions Status](https://github.com/buzzlay/yamdb_final/workflows/yamdb_final workflow/badge.svg)](https://github.com/buzzlay/yamdb_final/actions)
