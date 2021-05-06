@@ -57,7 +57,6 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
-          source: ".env,docker-compose.yaml,default.conf"
           script: |
             cd docker_files
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/yamdb_final
