@@ -57,7 +57,7 @@ jobs:
           rm: true
           source: "."
           target: "proj"
-      - name: executing remote ssh commands to deploy
+      - name: pass environment
         uses: appleboy/ssh-action@master
         env:
           DB_NAME = ${{ secrets.DB_NAME }}
@@ -73,6 +73,13 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           envs: DB_NAME,POSTGRES_USER,POSTGRES_PASSWORD,DB_HOST,DB_PORT,TELEGRAM_TOKEN,TELEGRAM_CHAT_ID
+      - name: executing remote ssh commands to deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
           script: |
             cd proj
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/yamdb_final
