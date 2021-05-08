@@ -55,7 +55,7 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           ovwrwrite: true
           rm: true
-          source: "/"
+          source: "."
           target: "proj"
       - name: executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
