@@ -68,6 +68,7 @@ jobs:
             cd docker_files
             sudo docker-compose down
             sudo docker-compose up
+
   send_message:
     runs-on: ubuntu-latest
     needs: deploy
