@@ -64,9 +64,9 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }} # если ваш ssh-ключ защищен паролем
           script: |
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/yamdb_final
             cd docker_files
-            sudo docker-compose down
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/yamdb_final
+            sudo docker-compose stop
             sudo docker-compose up
 
   send_message:
