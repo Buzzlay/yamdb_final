@@ -53,17 +53,26 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
-          ovwrwrite: true
+          overwrite: true
           rm: true
           source: "."
           target: "proj"
       - name: executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
+        env:
+          DB_NAME = ${{ secrets.DB_NAME }}
+          POSTGRES_USER = ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD = ${{ secrets.POSTGRES_PASSWORD }}
+          DB_HOST = ${{ secrets.DB_HOST }}
+          DB_PORT = ${{ secrets.DB_PORT }}
+          TELEGRAM_TOKEN = ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID = ${{ secrets.TELEGRAM_TO }}
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
+          envs: DB_NAME,POSTGRES_USER,POSTGRES_PASSWORD,DB_HOST,DB_PORT,TELEGRAM_TOKEN,TELEGRAM_CHAT_ID
           script: |
             cd proj
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/yamdb_final
