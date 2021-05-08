@@ -46,15 +46,6 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
-      - name: Add environment variables to .env
-        run: |
-          echo DB_NAME=${{ secrets.DB_NAME }} >> env.
-          echo DB_HOST=${{ secrets.DB_HOST }} >> env.
-          echo DB_PORT=${{ secrets.DB_PORT }} >> env.
-          echo POSTGRES_USER=${{ secrets.POSTGRES_USER }} >> env.
-          echo POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} >> env.
-          echo TELEGRAM_TOKEN=${{ secrets.TELEGRAM_TOKEN }} >> env.
-          echo TELEGRAM_CHAT_ID= ${{ secrets.TELEGRAM_TO }} >> env.
       - name: Copy file via ssh password
         uses: appleboy/scp-action@master
         with:
@@ -62,8 +53,9 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
+          ovwrwrite: true
           rm: true
-          source: "docker-compose.yaml,nginx/default.conf,Dockerfile,.env,"
+          source: ".env,docker-compose.yaml,nginx/default.conf"
           target: "docker_files"
       - name: executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
@@ -71,12 +63,12 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
-          passphrase: ${{ secrets.PASSPHRASE }} # если ваш ssh-ключ защищен паролем
+          passphrase: ${{ secrets.PASSPHRASE }}
           script: |
             cd docker_files
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/yamdb_final
-            sudo docker-compose stop
-            sudo docker-compose up
+            sudo docker-compose down
+            sudo docker-compose up -d --build
 
   send_message:
     runs-on: ubuntu-latest
